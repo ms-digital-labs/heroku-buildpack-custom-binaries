@@ -1,0 +1,12 @@
+set -e
+echo "-----> Installing custom binaries"
+
+cd $1
+mkdir -p bin
+
+for NAME in ${!CUSTOM_BINARY_*}
+do
+  echo -n "       Installing ${NAME:14} from ${!NAME} ... "
+  $(cd bin && curl -s ${!NAME} | tar -x)
+  echo "done"
+done
